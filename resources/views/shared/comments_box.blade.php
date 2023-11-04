@@ -2,8 +2,8 @@
     <form action="{{route('ideas.comments.store', $idea->id)}}" method="post">
         @csrf
         <div class="mb-3">
-            <textarea class="fs-6 form-control" rows="1" name="content" id="content"></textarea>
-            @error('content')
+            <textarea class="fs-6 form-control" rows="1" name="comment[{{$idea->id}}]" id="comment[{{$idea->id}}]"></textarea>
+            @error("comment.$idea->id")
                 <span class="fs-5 ms-1 text-danger"> {{$message}}</span>
             @enderror
         </div>
