@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Idea;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -20,15 +21,21 @@ class CommentController extends Controller
         $comment = new Comment([
             'idea_id'=> $idea->id,
             'content'=> $res_comment[$idea->id],
+            'user_id'=> auth()->user()->id,
         ]);
 
         $comment->save();
 
         return redirect()->route('ideas.show', $idea->id)->with('success','Comment created successfully.');
     }
-    public function destroy($comment){
-        Comment::findOrFail($comment)->delete();
-        return redirect()->route('dashboard')->with('success','Comment deleted successfully.');
+    public function destroy(Idea $idea, Comment $comment){
+
+        if(auth()->user()->id != $comment->user_id){
+            abort(404);
+        }
+
+        $comment->delete();
+        return redirect()->route('ideas.show', $idea->id)->with('success','Comment deleted successfully.');
     }
 
 }
