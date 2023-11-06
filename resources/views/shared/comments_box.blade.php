@@ -15,8 +15,8 @@
     <hr>
     @foreach ($idea->comments as $comment)
         <div class="d-flex align-items-start mb-2">
-            <img style="width:35px" class="me-2 avatar-sm rounded-circle"
-                src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $comment->user->name }}" alt="Luigi Avatar">
+            <img width="50px" height="50px" class="me-2 avatar-sm rounded-circle"
+                src="{{$comment->user->getImageURL()}}" alt="{{$comment->user->name}} avatar">
             <div class="w-100">
                 <div class="d-flex justify-content-between">
                     <div>
