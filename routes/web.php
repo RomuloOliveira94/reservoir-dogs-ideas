@@ -36,7 +36,9 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource('users', UserController::class)->only(['show', 'edit', 'update'])->middleware('auth');
+Route::resource('/users', UserController::class)->only(['show', 'edit', 'update'])->middleware('auth');
+
+Route::get('/profile', [UserController::class,'profile'])->middleware('auth')->name('profile');
 
 Route::get('/terms', function () {
     return view('terms');
