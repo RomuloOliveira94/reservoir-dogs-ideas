@@ -15,12 +15,15 @@
     <hr>
     @foreach ($idea->comments as $comment)
         <div class="d-flex align-items-start mb-2">
-            <img width="50px" height="50px" class="me-2 avatar-sm rounded-circle"
-                src="{{$comment->user->getImageURL()}}" alt="{{$comment->user->name}} avatar">
+            <a href="{{ route('users.show', $comment->user->id) }}"><img width="50px" height="50px"
+                    class="me-2 avatar-sm rounded-circle" src="{{ $comment->user->getImageURL() }}"
+                    alt="{{ $comment->user->name }} avatar">
+            </a>
             <div class="w-100">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h6 class="">{{ $comment->user->name }}
+                        <h6 class=""><a
+                                href="{{ route('users.show', $comment->user->id) }}">{{ $comment->user->name }}</a>
                         </h6>
                         <p class="fs-6 mt-1 fw-light d-flex">
                             {{ $comment->content }}
@@ -29,18 +32,18 @@
                     <div class="d-flex flex-column inline-block">
                         <small class="fs-6 fw-light text-muted"> {{ $comment->created_at }}</small>
                         @auth
-                        @if (auth()->user()->id === $comment->user_id)
-                        <form class="d-flex justify-content-end"
-                            action="{{ route('ideas.comments.destroy', [
-                                'idea' => $idea->id,
-                                'comment' => $comment->id,
-                            ]) }}"
-                            method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-sm btn-danger w-1">X</button>
-                        </form>
-                        @endif
+                            @if (auth()->user()->id === $comment->user_id)
+                                <form class="d-flex justify-content-end"
+                                    action="{{ route('ideas.comments.destroy', [
+                                        'idea' => $idea->id,
+                                        'comment' => $comment->id,
+                                    ]) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-sm btn-danger w-1">X</button>
+                                </form>
+                            @endif
                         @endauth
                     </div>
                 </div>
