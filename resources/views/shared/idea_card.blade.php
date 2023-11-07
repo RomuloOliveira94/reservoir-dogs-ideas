@@ -3,10 +3,13 @@
         <div class="px-3 pt-4 pb-2">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img width="50px" height="50px" class="me-2 avatar-sm rounded-circle"
-                    src="{{$idea->user->getImageURL()}}" alt="{{$idea->user->name}} avatar">
+                    <a href="{{ route('users.show', $idea->user->id) }}"><img width="50px" height="50px"
+                            class="me-2 avatar-sm rounded-circle" src="{{ $idea->user->getImageURL() }}"
+                            alt="{{ $idea->user->name }} avatar">
+                    </a>
                     <div>
-                        <h5 class="card-title mb-0"><a href="{{route('users.show', $idea->user->id)}}">{{ $idea->user->name }}
+                        <h5 class="card-title mb-0"><a
+                                href="{{ route('users.show', $idea->user->id) }}">{{ $idea->user->name }}
                             </a></h5>
                     </div>
                 </div>
