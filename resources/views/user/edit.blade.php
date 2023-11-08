@@ -8,11 +8,11 @@
             @include('shared.error_message')
             @include('shared.success_message')
             <div class="mt-3">
-                @include('shared.user_edit_card')
+                @include('user.shared.user_edit_card')
             </div>
             <hr>
             @forelse ($ideas as $idea)
-                @include('shared.idea_card')
+                @include('ideas.shared.idea_card')
             @empty
                 <h2 class="text-center">No results Found</h2>
             @endforelse

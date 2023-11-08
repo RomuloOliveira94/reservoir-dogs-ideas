@@ -28,6 +28,6 @@
         </ul>
     </div>
     <div class="card-footer text-center py-2">
-        <a class="btn btn-link btn-sm" href="{{route('profile')}}">View Profile </a>
+        <a class="btn btn-link btn-m {{Route::is('profile') ? 'text-white bg-primary rounded' : ''}}" href="{{route('profile')}}">View Profile </a>
     </div>
 </div>

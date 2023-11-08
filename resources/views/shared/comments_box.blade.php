@@ -13,7 +13,7 @@
     </form>
 
     <hr>
-    @foreach ($idea->comments as $comment)
+    @forelse ($idea->comments as $comment)
         <div class="d-flex align-items-start mb-2">
             <a href="{{ route('users.show', $comment->user->id) }}"><img width="50px" height="50px"
                     class="me-2 avatar-sm rounded-circle" src="{{ $comment->user->getImageURL() }}"
@@ -49,5 +49,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @empty
+        <h5 class="text-center">No comments</h5>
+    @endforelse
 </div>

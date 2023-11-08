@@ -7,7 +7,7 @@
     <div class="col-6">
         @include('shared.error_message')
         @include('shared.success_message')
-        @include('shared.idea_card')
+        @include('ideas.shared.idea_card')
     </div>
     <div class="col-3">
        @include('shared.search')
