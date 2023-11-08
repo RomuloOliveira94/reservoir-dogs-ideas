@@ -1,17 +1,26 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
+@extends('layout.layout')
+@section('content')
+    <div class="row">
+        <div class="col-3">
+            @include('shared.left_side_bar')
+        </div>
+        <div class="col-6">
+            @include('shared.error_message')
+            @include('shared.success_message')
+            @include('ideas.shared.submit_idea')
+            <hr>
+            @forelse ($ideas as $idea)
+                @include('ideas.shared.idea_card')
+            @empty
+                <h2 class="text-center">No results Found</h2>
+            @endforelse
+            <div class="mt-3">
+                {{ $ideas->withQueryString()->links() }}
             </div>
         </div>
+        <div class="col-3">
+            @include('shared.search')
+            @include('shared.follow_box')
+        </div>
     </div>
-</x-app-layout>
+@endsection
