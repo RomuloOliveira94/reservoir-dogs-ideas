@@ -15,14 +15,14 @@
                 </div>
                 <div>
                     <form action="{{ route('ideas.destroy', $idea->id) }}" method="post">
-                        @csrf
-                        @method('delete')
                         <a class="mx-1" href="{{ route('ideas.show', $idea->id) }}">Show</a>
                         @auth
-                            @if (auth()->user()->id === $idea->user_id)
+                            @can('update', $idea)
+                                @csrf
+                                @method('delete')
                                 <a class="mx-1" href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
                                 <button class="btn btn-danger btn-sm">X</button>
-                            @endif
+                            @endcan
                         @endauth
                     </form>
                 </div>
@@ -53,10 +53,10 @@
                 @include('ideas.shared.like_button')
                 <div>
                     <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
-                        {{ $idea->created_at }} </span>
+                        {{ $idea->created_at->diffForHumans() }} </span>
                 </div>
             </div>
-            @include('shared.comments_box')
+            @include('ideas.shared.comments_box')
         </div>
     </div>
 </div>
