@@ -11,14 +11,12 @@
                 </div>
             </div>
             <div>
-                @auth
-                    @if (Auth::id() === $user->id)
-                        <a href="{{ route('users.edit', $user->id) }}">Edit</a>
-                    @endif
-                @endauth
+                @can('update', $user)
+                    <a href="{{ route('users.edit', $user->id) }}">Edit</a>
+                @endcan
             </div>
         </div>
-        @if ($editing ?? false)
+        @if ($editing_profile ?? false)
             <div class="mt-4">
                 <label for="image">Profile picture</label>
                 <input type="file" name="image" id="image" class="form-control">
@@ -31,7 +29,7 @@
             </p>
             @include('user.shared.user_stats')
             @auth
-                @if (Auth::id() !== $user->id)
+                @if (Auth::user()->isNot($user))
                     <div class="mt-3">
                         @if (Auth::user()->follows($user))
                             <form action="{{ route('users.unfollow', $user->id) }}" method="post">
