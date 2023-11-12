@@ -163,11 +163,7 @@ return [
     |
     */
 
-    'custom' => [
-        "comment.*" => [
-            'required' => 'The comment field is required.',
-        ],
-    ],
+    'custom' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -180,6 +176,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'content' => 'comment'
+    ],
 
 ];
